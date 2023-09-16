@@ -1,4 +1,5 @@
  int video;
+ int video2;
  typedef int size_t;
  int NULL;
  char *keymap;
@@ -104,10 +105,16 @@ void strcpys(char* dest, const char* src) {
         {
         		   int i=video;
 			   char *fbp=(char* )i;
+			   if (b==10 || b==13)
+			   {
+			   	video2=video2+160;
+			   	video=video2;
+			   }else{
 			   	*((char *)(fbp)) =(char)b;
 			   	*((char *)(fbp+1)) =(char)0x17;
 			   video++;
-			   video++;  
+			   video++;
+			   }  
         }
 
 void prints(char *c)
@@ -279,6 +286,7 @@ char digitToChar(int digit) {
         		   char b[1024];
 			   char *a="wait....: ";
 			   video=0xb8000;
+			   video2=0xb8000;
 			   keymap="==1234567890-===qwertyuiop====asdfghjkl====\\zxcvbnm,.;/==== ";
 			   memoryStart = (unsigned char *)0x200000;
 			   timerss=(volatile unsigned int *)0xF0000;
